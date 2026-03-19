@@ -460,7 +460,10 @@ var dotLinks=dotNav.querySelectorAll('a');
 function updateDotNav(){
   var sy=window.scrollY;var heroH=document.querySelector('.hero').offsetHeight;
   dotNav.classList.toggle('visible',sy>heroH*0.6);
-  var current='';sections.forEach(function(s){if(sy>=s.offsetTop-300)current=s.id});
+  var current='';
+  var atBottom=(window.innerHeight+sy)>=document.body.offsetHeight-100;
+  if(atBottom){current='contact'}
+  else{sections.forEach(function(s){if(sy>=s.offsetTop-300)current=s.id})}
   dotLinks.forEach(function(a){a.classList.toggle('active',a.dataset.section===current)});
 }
 window.addEventListener('scroll',updateDotNav,{passive:true});updateDotNav();
