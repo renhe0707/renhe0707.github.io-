@@ -3,13 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Robert Ren — Quantitative Research &amp; Data Science</title>
-<meta name="description" content="Robert Ren is a quantitative research and data science professional. Purdue University Applied Statistics, with experience at Morgan Stanley Hong Kong and Silicon Valley startups.">
-<meta property="og:title" content="Robert Ren — Quantitative Research & Data Science">
-<meta property="og:description" content="Quantitative research & data science at Morgan Stanley and a San Francisco startup. Building factor models, risk frameworks, and analytical tools.">
+<title>Robert Ren — Quantitative Analytics &amp; Applied Statistics</title>
+<meta name="description" content="Robert Ren is a quantitative analytics and applied statistics professional. Purdue University Applied Statistics, with experience at Morgan Stanley Hong Kong and Silicon Valley startups.">
+<meta property="og:title" content="Robert Ren — Quantitative Analytics & Applied Statistics">
+<meta property="og:description" content="Quantitative analytics & applied statistics at Morgan Stanley and a San Francisco startup. Building factor models, risk frameworks, and analytical tools.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="headshot.jpeg">
+<meta property="og:image" content="https://renhe0707.github.io/headshot.jpeg">
 <meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>R</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -57,7 +58,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,249,247,
 @keyframes scrollPulse{0%{top:0;opacity:1}70%{top:20px;opacity:.3}100%{top:0;opacity:1}}
 @keyframes fadeIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 .anchor-strip{padding:0 2rem;margin-top:-1px;background:var(--paper)}
-.anchor-inner{max-width:var(--max-w);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;padding:3.5rem 0 4.5rem}
+.anchor-inner{max-width:var(--max-w);margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;padding:3.5rem 0 4.5rem}
 .anchor-card{text-decoration:none;color:var(--ink);padding:1.6rem 1.4rem;border:1px solid var(--border);border-radius:10px;background:var(--card);transition:all var(--ease);position:relative;overflow:hidden}
 .anchor-card:hover{border-color:var(--accent);box-shadow:0 6px 24px rgba(43,90,63,.06);transform:translateY(-3px)}
 .anchor-card:hover .ac-arrow{transform:translate(2px,-2px);color:var(--accent)}
@@ -158,6 +159,11 @@ body.dark .tl-desc strong{color:#e0deda}
 body.dark footer{background:#0a0a0a}
 .dark-toggle{background:none;border:1px solid var(--border);border-radius:100px;padding:.32rem .7rem;font-size:.72rem;cursor:pointer;color:var(--muted);transition:all var(--ease);display:flex;align-items:center;gap:.3rem;font-family:var(--sans)}.dark-toggle:hover{border-color:var(--ink);color:var(--ink)}
 .dark-toggle svg{width:14px;height:14px}
+
+.wechat-modal{position:fixed;inset:0;z-index:210;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;cursor:pointer;padding:2rem;flex-direction:column;gap:1rem}
+.wechat-modal.on{display:flex}
+.wechat-modal img{width:240px;height:240px;border-radius:12px;box-shadow:0 16px 48px rgba(0,0,0,.3)}
+.wechat-modal p{color:rgba(255,255,255,.7);font-size:.82rem;font-family:var(--sans)}
 </style>
 </head>
 <body>
@@ -187,8 +193,8 @@ body.dark footer{background:#0a0a0a}
 <div class="hero-line"></div>
 <h1 data-en>Robert Ren</h1>
 <h1 data-cn>任禾</h1>
-<p class="hero-tagline" data-en>Quantitative Research · Data Science · <strong>Purdue ’27</strong></p>
-<p class="hero-tagline" data-cn>量化研究 · 数据科学 · <strong>普渡大学 ’27</strong></p>
+<p class="hero-tagline" data-en>Quantitative Analytics · Applied Statistics · <strong>Purdue ’27</strong></p>
+<p class="hero-tagline" data-cn>量化分析 · 应用统计 · <strong>普渡大学 ’27</strong></p>
 <div class="scroll-cue"><span data-en>Explore</span><span data-cn>向下浏览</span><div class="scroll-arrow"></div></div>
 </section>
 
@@ -211,6 +217,12 @@ body.dark footer{background:#0a0a0a}
   <div class="ac-desc" data-en>Morgan Stanley, Oin Auto &amp; more</div><div class="ac-desc" data-cn>摩根士丹利、Oin Auto等</div>
   <span class="ac-arrow">↗</span>
 </a>
+<a href="#education" class="anchor-card reveal">
+  <svg class="ac-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg>
+  <div class="ac-title" data-en>Education</div><div class="ac-title" data-cn>教育背景</div>
+  <div class="ac-desc" data-en>Purdue ’27, Applied Statistics</div><div class="ac-desc" data-cn>普渡大学 ’27，应用统计学</div>
+  <span class="ac-arrow">↗</span>
+</a>
 <a href="#contact" class="anchor-card reveal">
   <svg class="ac-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
   <div class="ac-title" data-en>Contact</div><div class="ac-title" data-cn>联系方式</div>
@@ -225,7 +237,7 @@ body.dark footer{background:#0a0a0a}
 <h2 class="section-heading" data-en>Purdue University<br>Applied Statistics</h2>
 <h2 class="section-heading" data-cn>普渡大学<br>应用统计学</h2>
 <div class="about-grid" style="margin-top:2rem">
-<div class="about-photo reveal"><img src="headshot.jpeg" alt="Robert Ren"></div>
+<div class="about-photo reveal"><img src="headshot.jpeg" alt="Robert Ren - Quantitative Analytics and Applied Statistics"></div>
 <div class="about-content">
 <p data-en>I bring a <em>cross-market perspective</em> to quantitative work—having built fund attribution models at <strong>Morgan Stanley Hong Kong</strong> and production ML pipelines at a <strong>San Francisco startup</strong>. Bilingual in English and Mandarin, I translate between Asian and US financial contexts to deliver research that’s both rigorous and actionable.</p>
 <p data-cn>我具备<em>跨市场视角</em>的量化研究能力——曾在<strong>摩根士丹利香港</strong>构建基金归因模型，也在<strong>硅谷初创公司</strong>落地生产级ML管道。中英双语流利，能够在亚洲与美国金融语境之间自由切换，交付兼具严谨性与可执行性的研究成果。</p>
@@ -421,11 +433,12 @@ body.dark footer{background:#0a0a0a}
 <div class="section-line"></div>
 <div class="section-eyebrow">Contact</div>
 <h2 class="section-heading"><span data-en>Get in touch</span><span data-cn>联系方式</span></h2>
-<p class="section-desc" data-en>Open to conversations about quantitative research, data analytics, and opportunities.</p>
-<p class="section-desc" data-cn>欢迎就量化研究、数据分析相关话题交流。</p>
+<p class="section-desc" data-en>Open to conversations about quantitative analytics, applied statistics, and opportunities.</p>
+<p class="section-desc" data-cn>欢迎就量化分析、应用统计相关话题交流。</p>
 <div class="contact-row">
 <a href="mailto:robert.renhe.work@gmail.com" class="contact-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Email</a>
 <a href="https://www.linkedin.com/in/herenrobert" class="contact-pill" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn</a>
+<a href="javascript:void(0)" class="contact-pill" onclick="document.getElementById('wechatModal').classList.add('on')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 01.213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 00.167-.054l1.903-1.114a.864.864 0 01.717-.098 10.16 10.16 0 002.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348zM12.503 16.17c-.143 0-.283.015-.427.015-3.34 0-6.27-2.123-7.247-5.21a5.91 5.91 0 00-.106.995c0 3.463 3.23 6.296 7.247 6.296.56 0 1.1-.065 1.62-.178a.717.717 0 01.594.081l1.573.92a.27.27 0 00.138.045c.133 0 .24-.11.24-.245 0-.06-.024-.118-.04-.176l-.322-1.225a.49.49 0 01.176-.55C17.467 15.67 18.5 13.974 18.5 12.07c0-3.158-2.95-5.755-6.684-5.907.175.472.284.973.284 1.497 0 2.86-2.368 5.197-5.3 5.651.372 1.7 1.816 3.085 3.703 3.859z"/></svg>WeChat</a>
 <a href="https://github.com/renhe0707" class="contact-pill" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>GitHub</a>
 <a href="Robert_Ren_Resume.pdf" class="contact-pill" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 18 15 15"/></svg><span data-en>Resume</span><span data-cn>简历</span></a>
 </div></div></section>
@@ -439,7 +452,7 @@ document.querySelectorAll('.nav-links a').forEach(function(a){a.addEventListener
 function toggleLang(){document.body.classList.toggle('zh');document.querySelector('.lang-btn').textContent=document.body.classList.contains('zh')?'EN / \u4e2d':'\u4e2d / EN'}
 function openModal(img){document.getElementById('modal-img').src=img.src;document.getElementById('modal').classList.add('on');document.body.style.overflow='hidden'}
 function closeModal(){document.getElementById('modal').classList.remove('on');document.body.style.overflow=''}
-document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal()});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeModal();document.getElementById('wechatModal').classList.remove('on')}});
 var dotNav=document.getElementById('dotNav');
 var sections=document.querySelectorAll('section[id]');
 var dotLinks=dotNav.querySelectorAll('a');
@@ -464,5 +477,10 @@ function toggleProjects(){
 function toggleDark(){document.body.classList.toggle('dark');var isDark=document.body.classList.contains('dark');var icon=document.querySelector('.dark-toggle svg');if(isDark){icon.innerHTML='<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';localStorage.setItem("theme","dark")}else{icon.innerHTML='<path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>';localStorage.setItem("theme","light")}}
 if(localStorage.getItem("theme")==="dark"){document.body.classList.add("dark");var di=document.querySelector(".dark-toggle svg");if(di)di.innerHTML='<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';}
 </script>
+
+<div class="wechat-modal" id="wechatModal" onclick="this.classList.remove('on')">
+<img src="wechat.jpeg" alt="WeChat QR Code">
+<p><span data-en>Scan to add me on WeChat</span><span data-cn>扫码添加微信</span></p>
+</div>
 </body>
 </html>
