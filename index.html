@@ -36,7 +36,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,249,247,
 .lang-btn{background:none;border:1px solid var(--border);border-radius:100px;padding:.32rem .9rem;font-size:.7rem;font-weight:600;letter-spacing:.05em;cursor:pointer;color:var(--muted);transition:all var(--ease);font-family:var(--mono)}.lang-btn:hover{border-color:var(--ink);color:var(--ink)}
 .nav-toggle{display:none;background:none;border:none;cursor:pointer}.nav-toggle span{display:block;width:18px;height:1.5px;background:var(--ink);margin:4.5px 0;transition:all .2s}
 @media(max-width:640px){.nav-toggle{display:block}.nav-links{position:fixed;top:58px;left:0;right:0;background:rgba(250,249,247,.98);backdrop-filter:blur(20px);flex-direction:column;align-items:center;gap:0;max-height:0;overflow:hidden;transition:max-height .3s;border-bottom:1px solid var(--border)}.nav-links.open{max-height:300px}.nav-links a{padding:.85rem 0;display:block}}
-[data-cn]{display:none}body.zh [data-en]{display:none}body.zh [data-cn]{display:block}body.zh a[data-cn]{display:inline-flex}body.zh span[data-en]{display:none}body.zh span[data-cn]{display:inline}span[data-cn]{display:none}a[data-cn]{display:none}a[data-en]{display:inline-flex}
+[data-cn]{display:none}body.zh [data-en]{display:none}body.zh [data-cn]{display:block}body.zh a[data-cn]{display:inline-flex}body.zh .project-conclusion[data-cn]{display:flex}body.zh span[data-en]{display:none}body.zh span[data-cn]{display:inline}span[data-cn]{display:none}a[data-cn]{display:none}a[data-en]{display:inline-flex}
 .dot-nav{position:fixed;right:1.6rem;top:50%;transform:translateY(-50%);z-index:90;display:flex;flex-direction:column;gap:1.1rem;opacity:0;transition:opacity .5s;pointer-events:none}
 .dot-nav.visible{opacity:1;pointer-events:auto}
 .dot-nav a{display:flex;align-items:center;gap:.6rem;text-decoration:none;flex-direction:row-reverse}
@@ -164,6 +164,11 @@ body.dark footer{background:#0a0a0a}
 .wechat-modal.on{display:flex}
 .wechat-modal img{width:240px;height:240px;border-radius:12px;box-shadow:0 16px 48px rgba(0,0,0,.3)}
 .wechat-modal p{color:rgba(255,255,255,.7);font-size:.82rem;font-family:var(--sans)}
+
+.project-conclusion{padding:.6rem 2.2rem .2rem;display:flex;align-items:baseline;gap:.5rem}
+.project-conclusion span.pc-icon{color:var(--accent);font-size:.85rem;flex-shrink:0}
+.project-conclusion p{font-size:.82rem;color:var(--accent);font-weight:500;line-height:1.6;margin:0}
+@media(max-width:640px){.project-conclusion{padding-left:1.4rem;padding-right:1.4rem}}
 </style>
 </head>
 <body>
@@ -239,8 +244,8 @@ body.dark footer{background:#0a0a0a}
 <div class="about-grid" style="margin-top:2rem">
 <div class="about-photo reveal"><img src="headshot.jpeg" alt="Robert Ren - Quantitative Analytics and Applied Statistics"></div>
 <div class="about-content">
-<p data-en>I bring a <em>cross-market perspective</em> to quantitative work—having built fund attribution models at <strong>Morgan Stanley Hong Kong</strong> and production ML pipelines at a <strong>San Francisco startup</strong>. Bilingual in English and Mandarin, I translate between Asian and US financial contexts to deliver research that’s both rigorous and actionable.</p>
-<p data-cn>我具备<em>跨市场视角</em>的量化研究能力——曾在<strong>摩根士丹利香港</strong>构建基金归因模型，也在<strong>硅谷初创公司</strong>落地生产级ML管道。中英双语流利，能够在亚洲与美国金融语境之间自由切换，交付兼具严谨性与可执行性的研究成果。</p>
+<p data-en>I bring a <em>cross-market perspective</em> to quantitative work—having built fund attribution models at <strong>Morgan Stanley (HK)</strong> and production ML pipelines at a <strong>San Francisco startup</strong>. Bilingual in English and Mandarin, I translate between Asian and US financial contexts to deliver research that’s both rigorous and actionable.</p>
+<p data-cn>我具备<em>跨市场视角</em>的量化研究能力——曾在<strong>摩根士丹利（香港）</strong>构建基金归因模型，也在<strong>硅谷初创公司</strong>落地生产级ML管道。中英双语流利，能够在亚洲与美国金融语境之间自由切换，交付兼具严谨性与可执行性的研究成果。</p>
 <div class="about-stats">
 <div><span class="about-stat-num">2</span><div class="about-stat-label" data-en>Internships</div><div class="about-stat-label" data-cn>实习</div></div>
 <div><span class="about-stat-num">7</span><div class="about-stat-label" data-en>Projects</div><div class="about-stat-label" data-cn>项目</div></div>
@@ -262,11 +267,13 @@ body.dark footer{background:#0a0a0a}
 <div class="group-header"><span class="gh-line"></span><span class="gh-text"><span data-en>Featured</span><span data-cn>精选项目</span></span></div>
 
 <div class="project reveal"><div class="project-top">
-<span class="project-badge badge-intern">Morgan Stanley · Hong Kong</span><span class="featured-tag"><span data-en>★ Featured</span><span data-cn>★ 精选</span></span>
+<span class="project-badge badge-intern"><span data-en>Morgan Stanley · Hong Kong</span><span data-cn>摩根士丹利 · 香港</span></span><span class="featured-tag"><span data-en>★ Featured</span><span data-cn>★ 精选</span></span>
 <h3><span data-en>Multi-Factor Fund Analysis &amp; FOF Selection</span><span data-cn>多因子基金分析与FOF筛选框架</span></h3>
 <p class="project-desc" data-en>Screened 10 HK/offshore equity funds using Sharpe, Sortino, Calmar, and Information Ratio. Treynor-Mazuy factor attribution (250-day rolling) to decompose selection alpha and timing beta.</p>
 <p class="project-desc" data-cn>分析10只港股/QDII基金的夏普、索提诺、卡玛和信息比率。Treynor-Mazuy归因（250日滚动）分解选股alpha与择时beta。</p>
 </div>
+<div class="project-conclusion" data-en><span class="pc-icon">→</span><p>Found 2 of 10 funds with statistically significant alpha; recommended reallocation away from closet-indexing funds.</p></div>
+<div class="project-conclusion" data-cn><span class="pc-icon">→</span><p>发现10只基金中2只具有统计显著的alpha，建议减配“壁橱指数化”基金。</p></div>
 <div class="project-pills"><span class="tech">Python</span><span class="tech">scipy</span><span class="tech">Treynor-Mazuy</span><span class="tech">AKShare</span></div>
 <div class="project-metrics"><div class="pm-item"><span class="pm-val">10</span><span class="pm-label" data-en>Funds</span><span class="pm-label" data-cn>基金</span></div><div class="pm-item"><span class="pm-val">919</span><span class="pm-label" data-en>Trading Days</span><span class="pm-label" data-cn>交易日</span></div><div class="pm-item"><span class="pm-val">2/10</span><span class="pm-label" data-en>Sig. Alpha</span><span class="pm-label" data-cn>显著α</span></div></div>
 <div class="project-images-featured">
@@ -275,11 +282,13 @@ body.dark footer{background:#0a0a0a}
 <div class="project-foot"><a class="pf-link" href="https://github.com/renhe0707/fund-analysis" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>Repository</a></div></div>
 
 <div class="project reveal"><div class="project-top">
-<span class="project-badge badge-course">MA 37300 Financial Mathematics</span><span class="featured-tag"><span data-en>★ Featured</span><span data-cn>★ 精选</span></span>
+<span class="project-badge badge-course"><span data-en>MA 37300 Financial Mathematics</span><span data-cn>MA 37300 金融数学</span></span><span class="featured-tag"><span data-en>★ Featured</span><span data-cn>★ 精选</span></span>
 <h3><span data-en>Shenwan Sector Rotation Strategy</span><span data-cn>申万行业轮动策略回测</span></h3>
 <p class="project-desc" data-en>Monthly rotation across 31 Shenwan industries using momentum, risk-adjusted momentum, and turnover trend factors. Outperformed CSI 300 by +12.5pp in 2025.</p>
 <p class="project-desc" data-cn>基于动量、风险调整动量和成交额趋势的月频轮动策略，覆盖31个申万行业。2025年超沦深300达12.5个百分点。</p>
 </div>
+<div class="project-conclusion" data-en><span class="pc-icon">→</span><p>Strategy returned +30.2% vs CSI 300’s +17.7% in 2025; momentum-turnover composite showed strongest predictive power.</p></div>
+<div class="project-conclusion" data-cn><span class="pc-icon">→</span><p>策略在2025年回报+30.2%，超越沦深300的+17.7%；动量-成交额复合因子预测力最强。</p></div>
 <div class="project-pills"><span class="tech">Factor Model</span><span class="tech">Backtesting</span><span class="tech">AKShare</span></div>
 <div class="project-metrics"><div class="pm-item"><span class="pm-val">31</span><span class="pm-label" data-en>Industries</span><span class="pm-label" data-cn>行业</span></div><div class="pm-item"><span class="pm-val">55.6%</span><span class="pm-label" data-en>Win Rate</span><span class="pm-label" data-cn>胜率</span></div><div class="pm-item"><span class="pm-val">+30.2%</span><span class="pm-label">2025</span></div></div>
 <div class="project-images-featured">
@@ -295,7 +304,7 @@ body.dark footer{background:#0a0a0a}
 <div class="more-projects" id="moreProjects">
 <div class="group-header"><span class="gh-line"></span><span class="gh-text"><span data-en>Internship Projects</span><span data-cn>实习项目</span></span></div>
 <div class="project reveal"><div class="project-top">
-<span class="project-badge badge-intern">Oin Auto · San Francisco</span>
+<span class="project-badge badge-intern"><span data-en>Oin Auto · San Francisco</span><span data-cn>Oin Auto · 旧金山</span></span>
 <h3><span data-en>Vehicle Condition Classification &amp; Data Pipeline</span><span data-cn>车辆状态分类与自动化数据管道</span></h3>
 <p class="project-desc" data-en>Gradient Boosting classifier on 8,500+ vehicle telemetry records (92% accuracy). Automated pipeline supports 50K+ records/day processing.</p>
 <p class="project-desc" data-cn>基于8,500+条传感器数据的梯度提升分类模型（92%准确率）。自动化管道支撑日处理5万+条数据。</p>
@@ -307,7 +316,7 @@ body.dark footer{background:#0a0a0a}
 
 <div class="group-header"><span class="gh-line"></span><span class="gh-text"><span data-en>Course Projects</span><span data-cn>课程项目</span></span></div>
 <div class="project reveal"><div class="project-top">
-<span class="project-badge badge-course">STAT 41600 Probability</span>
+<span class="project-badge badge-course"><span data-en>STAT 41600 Probability</span><span data-cn>STAT 41600 概率论</span></span>
 <h3><span data-en>Portfolio VaR &amp; Stress Testing</span><span data-cn>投资组合VaR与压力测试</span></h3>
 <p class="project-desc" data-en>5-asset portfolio VaR/CVaR via Historical Simulation and Monte Carlo (50K sims). Stress-tested against COVID crash, Fed hike cycle, and hypothetical extremes.</p>
 <p class="project-desc" data-cn>5类资产组合的VaR/CVaR（历史模拟+5万次蒙特卡洛）。对新冠暴跌、加息周期等极端情景压力测试。</p>
@@ -359,7 +368,7 @@ body.dark footer{background:#0a0a0a}
 <div class="tl-item reveal">
 <div class="tl-date">Jun – Aug 2024</div>
 <h3><span data-en>Research Analyst Intern</span><span data-cn>研究分析实习生</span></h3>
-<div class="tl-company">Morgan Stanley · Hong Kong</div>
+<div class="tl-company"><span data-en>Morgan Stanley · Hong Kong</span><span data-cn>摩根士丹利 · 香港</span></div>
 <div class="tl-metrics">
 <div class="tl-metric"><span class="tl-metric-val">10+</span><span class="tl-metric-label"><span data-en>Funds Analyzed</span><span data-cn>分析基金数</span></span></div>
 <div class="tl-metric"><span class="tl-metric-val">40%</span><span class="tl-metric-label"><span data-en>Faster Turnaround</span><span data-cn>效率提升</span></span></div>
@@ -371,7 +380,7 @@ body.dark footer{background:#0a0a0a}
 <div class="tl-item reveal">
 <div class="tl-date">Dec 2023 – Mar 2024</div>
 <h3><span data-en>Data Analyst Intern</span><span data-cn>数据分析实习生</span></h3>
-<div class="tl-company">Oin Auto · San Francisco</div>
+<div class="tl-company"><span data-en>Oin Auto · San Francisco</span><span data-cn>Oin Auto · 旧金山</span></div>
 <div class="tl-metrics">
 <div class="tl-metric"><span class="tl-metric-val">92%</span><span class="tl-metric-label"><span data-en>Model Accuracy</span><span data-cn>模型准确率</span></span></div>
 <div class="tl-metric"><span class="tl-metric-val">8,500+</span><span class="tl-metric-label"><span data-en>Records Processed</span><span data-cn>数据量</span></span></div>
@@ -387,7 +396,7 @@ body.dark footer{background:#0a0a0a}
 <div class="tl-item reveal">
 <div class="tl-date">2025</div>
 <h3><span data-en>Co-Founder</span><span data-cn>联合创始人</span></h3>
-<div class="tl-company">Bondminton at Purdue</div>
+<div class="tl-company"><span data-en>Bondminton at Purdue</span><span data-cn>Bondminton 羽毛球社团 · 普渡大学</span></div>
 <div class="tl-metrics">
 <div class="tl-metric"><span class="tl-metric-val">0 → 39</span><span class="tl-metric-label"><span data-en>Members in 1 Semester</span><span data-cn>一学期会员增长</span></span></div>
 </div>
@@ -397,7 +406,7 @@ body.dark footer{background:#0a0a0a}
 <div class="tl-item reveal">
 <div class="tl-date">Jan – Dec 2025</div>
 <h3><span data-en>Director, Sustainability</span><span data-cn>可持续发展委员会主任</span></h3>
-<div class="tl-company">Purdue Student Government</div>
+<div class="tl-company"><span data-en>Purdue Student Government</span><span data-cn>普渡大学学生会</span></div>
 <div class="tl-metrics">
 <div class="tl-metric"><span class="tl-metric-val">2</span><span class="tl-metric-label"><span data-en>Proposals Adopted</span><span data-cn>建议书被采纳</span></span></div>
 </div>
@@ -415,7 +424,7 @@ body.dark footer{background:#0a0a0a}
 <div class="tl-item reveal">
 <div class="tl-date"><span data-en>Expected May 2027</span><span data-cn>预计2027年5月</span></div>
 <h3><span data-en>B.S. Applied Statistics</span><span data-cn>应用统计学 学士</span></h3>
-<div class="tl-company">West Lafayette, Indiana</div>
+<div class="tl-company"><span data-en>West Lafayette, Indiana</span><span data-cn>印第安纳州西拉法叶特</span></div>
 <p class="tl-desc" data-en><strong>Relevant Coursework:</strong> Financial Mathematics (MA 373) · Probability (STAT 416) · Long-Term Actuarial Mathematics (STAT 472) · Regression Analysis (STAT 350) · Time Series &amp; Applications (STAT 474)</p>
 <p class="tl-desc" data-cn><strong>相关课程：</strong>金融数学 (MA 373) · 概率论 (STAT 416) · 长期精算数学 (STAT 472) · 回归分析 (STAT 350) · 时间序列与应用 (STAT 474)</p>
 </div>
