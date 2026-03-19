@@ -7,13 +7,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{--ink:#1a1a1a;--paper:#faf9f7;--accent:#2b5a3f;--accent-soft:rgba(43,90,63,.07);--accent2:#1a3a6b;--accent2-soft:rgba(26,58,107,.07);--muted:#7a7a7a;--border:#e5e4e0;--card:#fff;--serif:'Playfair Display',Georgia,serif;--sans:'DM Sans',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace;--max-w:1080px;--ease:.4s cubic-bezier(.4,0,.2,1)}
+:root{
+  --ink:#1a1a1a;--paper:#faf9f7;--accent:#2b5a3f;--accent-soft:rgba(43,90,63,.07);
+  --accent2:#1a3a6b;--accent2-soft:rgba(26,58,107,.07);
+  --muted:#7a7a7a;--border:#e5e4e0;--card:#fff;
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'DM Sans',-apple-system,sans-serif;
+  --mono:'JetBrains Mono',monospace;
+  --max-w:1080px;--ease:.4s cubic-bezier(.4,0,.2,1)
+}
 html{scroll-behavior:smooth}
 body{font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.7;-webkit-font-smoothing:antialiased}
 ::selection{background:var(--accent);color:#fff}
 img{display:block;max-width:100%}
 
-/* NAV */
+/* ──────── NAV ──────── */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,249,247,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid transparent;transition:border-color .3s}
 .nav-inner{max-width:var(--max-w);margin:0 auto;padding:0 2rem;height:58px;display:flex;align-items:center;justify-content:space-between}
 .nav-name{font-family:var(--serif);font-size:1.15rem;color:var(--ink);text-decoration:none;letter-spacing:-.01em}
@@ -24,48 +32,80 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,249,247,
 .nav-toggle{display:none;background:none;border:none;cursor:pointer}.nav-toggle span{display:block;width:18px;height:1.5px;background:var(--ink);margin:4.5px 0;transition:all .2s}
 @media(max-width:640px){.nav-toggle{display:block}.nav-links{position:fixed;top:58px;left:0;right:0;background:rgba(250,249,247,.98);backdrop-filter:blur(20px);flex-direction:column;align-items:center;gap:0;max-height:0;overflow:hidden;transition:max-height .3s;border-bottom:1px solid var(--border)}.nav-links.open{max-height:300px}.nav-links a{padding:.85rem 0;display:block}}
 
-/* LANG */
+/* ──────── LANG TOGGLE ──────── */
 [data-cn]{display:none}body.zh [data-en]{display:none}body.zh [data-cn]{display:block}body.zh span[data-en]{display:none}body.zh span[data-cn]{display:inline}span[data-cn]{display:none}
 
-/* HERO */
-.hero{min-height:100vh;display:flex;align-items:center;padding:130px 2rem 110px}
-.hero-inner{max-width:var(--max-w);margin:0 auto;width:100%}
-.hero-grid{display:grid;grid-template-columns:1fr auto;gap:5rem;align-items:center}
-.hero-line{width:40px;height:1.5px;background:var(--accent);margin-bottom:1.5rem;opacity:0;animation:fadeIn .8s .15s forwards}
-.hero h1{font-family:var(--serif);font-size:clamp(2.8rem,6vw,4.5rem);font-weight:400;line-height:1.1;letter-spacing:-.03em;margin-bottom:1.6rem;opacity:0;animation:fadeIn .8s .3s forwards}
-.hero h1 em{font-style:italic;color:var(--accent)}
-.hero-sub{font-size:1rem;color:var(--muted);max-width:460px;line-height:1.85;margin-bottom:2.5rem;opacity:0;animation:fadeIn .8s .45s forwards}.hero-sub strong{color:var(--ink);font-weight:500}
-.hero-links{display:flex;gap:.7rem;flex-wrap:wrap;opacity:0;animation:fadeIn .8s .6s forwards}
-.hero-photo{opacity:0;animation:fadeIn .8s .45s forwards}
-.hero-photo img{width:220px;height:220px;border-radius:50%;object-fit:cover;object-position:center top;border:3px solid var(--border);box-shadow:0 12px 40px rgba(0,0,0,.08)}
-@media(max-width:768px){.hero-grid{grid-template-columns:1fr;text-align:center}.hero-photo{order:-1;display:flex;justify-content:center}.hero-photo img{width:170px;height:170px}.hero-sub{margin-left:auto;margin-right:auto}.hero-links{justify-content:center}.hero-line{margin-left:auto;margin-right:auto}}
+/* ──────── DOT NAV (side) ──────── */
+.dot-nav{position:fixed;right:1.6rem;top:50%;transform:translateY(-50%);z-index:90;display:flex;flex-direction:column;gap:1.1rem;opacity:0;transition:opacity .5s;pointer-events:none}
+.dot-nav.visible{opacity:1;pointer-events:auto}
+.dot-nav a{display:flex;align-items:center;gap:.6rem;text-decoration:none;flex-direction:row-reverse}
+.dot-nav .dot{width:8px;height:8px;border-radius:50%;border:1.5px solid var(--border);background:transparent;transition:all .3s;flex-shrink:0}
+.dot-nav .dot-label{font-family:var(--mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:transparent;transition:all .3s;white-space:nowrap}
+.dot-nav a:hover .dot-label{color:var(--muted)}
+.dot-nav a.active .dot{background:var(--accent);border-color:var(--accent);transform:scale(1.2)}
+.dot-nav a.active .dot-label{color:var(--accent)}
+@media(max-width:900px){.dot-nav{display:none}}
 
-.pill{display:inline-flex;align-items:center;gap:.4rem;padding:.55rem 1.3rem;border-radius:100px;font-size:.82rem;font-weight:500;text-decoration:none;transition:all var(--ease);border:none;cursor:pointer}
-.pill-fill{background:var(--ink);color:#fff}.pill-fill:hover{background:var(--accent)}
-.pill-ghost{background:transparent;color:var(--ink);border:1px solid var(--border)}.pill-ghost:hover{border-color:var(--ink)}
+/* ──────── HERO — minimal fullscreen ──────── */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 2rem 60px;position:relative}
+.hero-line{width:40px;height:1.5px;background:var(--accent);margin:0 auto 1.8rem;opacity:0;animation:fadeIn .8s .15s forwards}
+.hero h1{font-family:var(--serif);font-size:clamp(3.2rem,7vw,5.5rem);font-weight:400;line-height:1.05;letter-spacing:-.035em;margin-bottom:1.2rem;opacity:0;animation:fadeIn .8s .3s forwards}
+.hero-tagline{font-size:1.05rem;color:var(--muted);max-width:420px;margin:0 auto;line-height:1.8;opacity:0;animation:fadeIn .8s .5s forwards}
+.hero-tagline strong{color:var(--ink);font-weight:500}
+
+/* scroll indicator */
+.scroll-cue{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;opacity:0;animation:fadeIn .8s .9s forwards}
+.scroll-cue span{font-family:var(--mono);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+.scroll-arrow{width:1px;height:28px;position:relative;background:var(--border)}
+.scroll-arrow::after{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:3px;height:10px;background:var(--accent);border-radius:2px;animation:scrollPulse 2s ease-in-out infinite}
+@keyframes scrollPulse{0%{top:0;opacity:1}70%{top:20px;opacity:.3}100%{top:0;opacity:1}}
 @keyframes fadeIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 
-/* SKILLS BAND */
-.skills-band{background:var(--ink);color:#fff;padding:3.2rem 2rem}
-.skills-inner{max-width:var(--max-w);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem}
-.skill-col h3{font-size:.65rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:.7rem}
-.skill-col p{font-size:.85rem;color:rgba(255,255,255,.7);line-height:1.9}
-@media(max-width:768px){.skills-inner{grid-template-columns:1fr 1fr}}@media(max-width:480px){.skills-inner{grid-template-columns:1fr}}
+/* ──────── ANCHOR CARDS — section guide ──────── */
+.anchor-strip{padding:0 2rem;margin-top:-1px;background:var(--paper)}
+.anchor-inner{max-width:var(--max-w);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;padding:3.5rem 0 4.5rem}
+.anchor-card{text-decoration:none;color:var(--ink);padding:1.6rem 1.4rem;border:1px solid var(--border);border-radius:10px;background:var(--card);transition:all var(--ease);position:relative;overflow:hidden}
+.anchor-card:hover{border-color:var(--accent);box-shadow:0 6px 24px rgba(43,90,63,.06);transform:translateY(-3px)}
+.anchor-card:hover .ac-arrow{transform:translate(2px,-2px);color:var(--accent)}
+.ac-icon{font-size:1.5rem;margin-bottom:.8rem;display:block}
+.ac-title{font-family:var(--serif);font-size:1rem;font-weight:400;margin-bottom:.3rem}
+.ac-desc{font-size:.75rem;color:var(--muted);line-height:1.6}
+.ac-arrow{position:absolute;top:1.4rem;right:1.4rem;color:var(--border);transition:all .3s;font-size:1rem}
+@media(max-width:768px){.anchor-inner{grid-template-columns:1fr 1fr;gap:.8rem}}
+@media(max-width:480px){.anchor-inner{grid-template-columns:1fr}}
 
-/* SECTIONS */
+/* ──────── SECTIONS ──────── */
 section{padding:90px 2rem}.section-inner{max-width:var(--max-w);margin:0 auto}
 .section-line{width:32px;height:1.5px;background:var(--accent);margin-bottom:.8rem}
 .section-eyebrow{font-family:var(--mono);font-size:.65rem;color:var(--accent);letter-spacing:.18em;text-transform:uppercase;margin-bottom:.5rem}
 .section-heading{font-family:var(--serif);font-size:clamp(1.7rem,3.2vw,2.4rem);font-weight:400;letter-spacing:-.02em;margin-bottom:.7rem}
 .section-desc{color:var(--muted);font-size:.92rem;max-width:500px;margin-bottom:3rem}
 
-/* GROUP HEADERS */
+/* ──────── ABOUT (with skills integrated) ──────── */
+#about{background:var(--card)}
+.about-grid{display:grid;grid-template-columns:auto 1fr;gap:3.5rem;align-items:start}
+.about-photo img{width:200px;height:200px;border-radius:50%;object-fit:cover;object-position:center top;border:3px solid var(--border);box-shadow:0 12px 40px rgba(0,0,0,.08)}
+.about-content{max-width:620px}
+.about-content p{color:#555;margin-bottom:1.1rem;font-size:.93rem}
+.about-content strong{color:var(--ink);font-weight:500}.about-content em{color:var(--accent);font-style:normal;font-weight:500}
+.about-stats{display:flex;gap:3rem;margin-top:2.2rem;padding-top:1.8rem;border-top:1px solid var(--border)}
+.about-stat-num{font-family:var(--serif);font-size:2rem;color:var(--accent);line-height:1;display:block}.about-stat-label{font-size:.75rem;color:var(--muted);margin-top:.25rem}
+@media(max-width:768px){.about-grid{grid-template-columns:1fr;text-align:center}.about-photo{display:flex;justify-content:center}.about-photo img{width:160px;height:160px}.about-stats{justify-content:center}}
+
+/* skills inside about */
+.skills-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:2.5rem;padding-top:2rem;border-top:1px solid var(--border)}
+.skill-item h4{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.4rem}
+.skill-item p{font-size:.82rem;color:var(--muted);line-height:1.8}
+@media(max-width:768px){.skills-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.skills-grid{grid-template-columns:1fr}}
+
+/* ──────── GROUP HEADERS ──────── */
 .group-header{display:flex;align-items:center;gap:.8rem;margin:3rem 0 1.2rem}
 .group-header:first-child{margin-top:0}
 .group-header .gh-line{flex:0 0 20px;height:1px;background:var(--accent2)}
 .group-header .gh-text{font-family:var(--mono);font-size:.7rem;color:var(--accent2);letter-spacing:.12em;text-transform:uppercase}
 
-/* PROJECTS */
+/* ──────── PROJECTS ──────── */
 #projects{background:var(--paper)}
 .project{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:2rem;transition:box-shadow var(--ease)}.project:hover{box-shadow:0 6px 28px rgba(0,0,0,.06)}
 .project-top{padding:2rem 2.2rem 0}
@@ -84,22 +124,15 @@ section{padding:90px 2rem}.section-inner{max-width:var(--max-w);margin:0 auto}
 .pf-link svg{width:14px;height:14px}
 @media(max-width:640px){.project-top,.project-pills,.project-foot,.project-metrics{padding-left:1.4rem;padding-right:1.4rem}.project-images{grid-template-columns:1fr;padding:0 1.4rem 1rem}}
 
-/* ABOUT */
-#about{background:var(--card)}.about-content{max-width:620px}
-.about-content p{color:#555;margin-bottom:1.1rem;font-size:.93rem}
-.about-content strong{color:var(--ink);font-weight:500}.about-content em{color:var(--accent);font-style:normal;font-weight:500}
-.about-stats{display:flex;gap:3rem;margin-top:2.2rem;padding-top:1.8rem;border-top:1px solid var(--border)}
-.about-stat-num{font-family:var(--serif);font-size:2rem;color:var(--accent);line-height:1;display:block}.about-stat-label{font-size:.75rem;color:var(--muted);margin-top:.25rem}
-
-/* TIMELINE */
-#experience{background:var(--card)}#leadership{background:var(--paper)}
+/* ──────── TIMELINE ──────── */
+#experience{background:var(--card)}
 .timeline{position:relative;padding-left:1.5rem;margin-top:2.2rem}.timeline::before{content:'';position:absolute;left:0;top:6px;bottom:6px;width:1px;background:var(--border)}
 .tl-item{position:relative;margin-bottom:2rem}.tl-item::before{content:'';position:absolute;left:-1.5rem;top:8px;width:6px;height:6px;border-radius:50%;background:var(--accent);transform:translateX(-2.5px)}
 .tl-date{font-family:var(--mono);font-size:.7rem;color:var(--accent);letter-spacing:.04em;margin-bottom:.15rem}
 .tl-item h3{font-size:.95rem;font-weight:600;margin-bottom:.1rem}.tl-company{font-size:.85rem;color:var(--muted);margin-bottom:.4rem}
 .tl-desc{font-size:.85rem;color:#555;line-height:1.75}
 
-/* CONTACT */
+/* ──────── CONTACT ──────── */
 #contact{background:var(--ink);color:#fff;text-align:center}
 #contact .section-line{margin:0 auto .8rem}
 #contact .section-eyebrow{color:rgba(255,255,255,.3)}#contact .section-heading{color:#fff}
@@ -108,12 +141,20 @@ section{padding:90px 2rem}.section-inner{max-width:var(--max-w);margin:0 auto}
 .contact-pill{display:inline-flex;align-items:center;gap:.4rem;padding:.55rem 1.2rem;border-radius:100px;font-size:.82rem;font-weight:500;background:rgba(255,255,255,.06);color:#fff;text-decoration:none;border:1px solid rgba(255,255,255,.1);transition:all var(--ease)}.contact-pill:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.2)}.contact-pill svg{width:15px;height:15px}
 
 footer{background:var(--ink);color:rgba(255,255,255,.25);text-align:center;padding:1.4rem;font-size:.72rem;border-top:1px solid rgba(255,255,255,.04)}
+
+/* ──────── MODAL ──────── */
 .modal{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.9);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;cursor:zoom-out;padding:2rem}.modal.on{display:flex}.modal img{max-width:90vw;max-height:90vh;border-radius:6px}
+
+/* ──────── SCROLL REVEAL ──────── */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
 ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--paper)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
 </style>
 </head>
 <body>
 
+<!-- ═══ NAV ═══ -->
 <nav><div class="nav-inner">
 <a href="#" class="nav-name">Robert Ren</a>
 <div class="nav-right">
@@ -128,37 +169,62 @@ footer{background:var(--ink);color:rgba(255,255,255,.25);text-align:center;paddi
 </div>
 </div></nav>
 
-<!-- HERO -->
-<section class="hero"><div class="hero-inner hero-grid">
-<div>
+<!-- ═══ DOT NAV (side) ═══ -->
+<div class="dot-nav" id="dotNav">
+<a href="#about" data-section="about"><span class="dot-label"><span data-en>About</span><span data-cn>关于</span></span><span class="dot"></span></a>
+<a href="#projects" data-section="projects"><span class="dot-label"><span data-en>Projects</span><span data-cn>项目</span></span><span class="dot"></span></a>
+<a href="#experience" data-section="experience"><span class="dot-label"><span data-en>Experience</span><span data-cn>经历</span></span><span class="dot"></span></a>
+<a href="#contact" data-section="contact"><span class="dot-label"><span data-en>Contact</span><span data-cn>联系</span></span><span class="dot"></span></a>
+</div>
+
+<!-- ═══ HERO — clean & minimal ═══ -->
+<section class="hero" id="hero">
 <div class="hero-line"></div>
 <h1 data-en>Robert Ren</h1>
 <h1 data-cn>任禾</h1>
-<p class="hero-sub" data-en>Quantitative research &amp; data science at <strong>Morgan Stanley</strong> and a <strong>San Francisco startup</strong>. Building factor models, risk frameworks, and analytical tools.</p>
-<p class="hero-sub" data-cn>曾于<strong>摩根士丹利</strong>（香港）与<strong>硅谷初创公司</strong>从事量化研究与数据分析。构建因子模型、风险框架和分析工具。</p>
-<div class="hero-links">
-<a href="#projects" class="pill pill-fill"><span data-en>Projects</span><span data-cn>项目</span></a>
-<a href="https://github.com/renhe0707" class="pill pill-ghost" target="_blank">GitHub</a>
-<a href="mailto:robert.renhe.work@gmail.com" class="pill pill-ghost">Email</a>
-</div>
-</div>
-<div class="hero-photo"><img src="headshot.jpeg" alt="Robert Ren"></div>
-</div></section>
+<p class="hero-tagline" data-en>Quantitative Research · Data Science · <strong>Purdue '27</strong></p>
+<p class="hero-tagline" data-cn>量化研究 · 数据科学 · <strong>普渡大学 '27</strong></p>
+<div class="scroll-cue"><span data-en>Explore</span><span data-cn>向下浏览</span><div class="scroll-arrow"></div></div>
+</section>
 
-<!-- SKILLS -->
-<div class="skills-band"><div class="skills-inner">
-<div class="skill-col"><h3><span data-en>Languages</span><span data-cn>编程</span></h3><p>Python · SQL · R · Git</p></div>
-<div class="skill-col"><h3><span data-en>Quantitative</span><span data-cn>量化</span></h3><p data-en>Factor Models · VaR · DCF · Monte Carlo · Backtesting</p><p data-cn>因子模型 · VaR · DCF · 蒙特卡洛 · 回测</p></div>
-<div class="skill-col"><h3><span data-en>Data & ML</span><span data-cn>数据</span></h3><p>pandas · NumPy · scikit-learn · statsmodels · matplotlib</p></div>
-<div class="skill-col"><h3><span data-en>Domain</span><span data-cn>领域</span></h3><p data-en>Equity Research · Risk Management · ETL · Dashboards</p><p data-cn>行业研究 · 风险管理 · ETL · 看板</p></div>
+<!-- ═══ ANCHOR CARDS ═══ -->
+<div class="anchor-strip"><div class="anchor-inner">
+<a href="#about" class="anchor-card reveal">
+  <span class="ac-icon">○</span>
+  <div class="ac-title" data-en>About</div><div class="ac-title" data-cn>关于我</div>
+  <div class="ac-desc" data-en>Background, skills &amp; education</div><div class="ac-desc" data-cn>背景、技能与教育</div>
+  <span class="ac-arrow">↗</span>
+</a>
+<a href="#projects" class="anchor-card reveal" style="animation-delay:.1s">
+  <span class="ac-icon">◈</span>
+  <div class="ac-title" data-en>Projects</div><div class="ac-title" data-cn>项目作品</div>
+  <div class="ac-desc" data-en>7 quantitative &amp; data projects</div><div class="ac-desc" data-cn>7个量化与数据项目</div>
+  <span class="ac-arrow">↗</span>
+</a>
+<a href="#experience" class="anchor-card reveal" style="animation-delay:.2s">
+  <span class="ac-icon">▬</span>
+  <div class="ac-title" data-en>Experience</div><div class="ac-title" data-cn>工作经历</div>
+  <div class="ac-desc" data-en>Morgan Stanley, Oin Auto &amp; more</div><div class="ac-desc" data-cn>摩根士丹利、Oin Auto等</div>
+  <span class="ac-arrow">↗</span>
+</a>
+<a href="#contact" class="anchor-card reveal" style="animation-delay:.3s">
+  <span class="ac-icon">✦</span>
+  <div class="ac-title" data-en>Contact</div><div class="ac-title" data-cn>联系方式</div>
+  <div class="ac-desc" data-en>Let's connect</div><div class="ac-desc" data-cn>期待交流</div>
+  <span class="ac-arrow">↗</span>
+</a>
 </div></div>
 
-<!-- ABOUT -->
-<section id="about"><div class="section-inner"><div class="about-content">
+<!-- ═══ ABOUT (with photo + skills integrated) ═══ -->
+<section id="about"><div class="section-inner">
 <div class="section-line"></div>
 <div class="section-eyebrow"><span data-en>About</span><span data-cn>关于</span></div>
 <h2 class="section-heading" data-en>Purdue University<br>Applied Statistics</h2>
 <h2 class="section-heading" data-cn>普渡大学<br>应用统计学</h2>
+
+<div class="about-grid" style="margin-top:2rem">
+<div class="about-photo reveal"><img src="headshot.jpeg" alt="Robert Ren"></div>
+<div class="about-content">
 <p data-en>I combine <em>rigorous quantitative methodology</em> with clear, actionable conclusions. At <strong>Morgan Stanley Hong Kong</strong>, I built Treynor-Mazuy attribution models and automated fund screening pipelines. At <strong>Oin Auto</strong> in San Francisco, I developed ML classifiers and real-time data infrastructure.</p>
 <p data-cn>我将<em>严谨的量化方法论</em>与清晰可操作的结论相结合。在<strong>摩根士丹利香港</strong>，构建Treynor-Mazuy归因模型和自动化基金筛选管道。在旧金山<strong>Oin Auto</strong>，开发ML分类器和实时数据基础设施。</p>
 <div class="about-stats">
@@ -166,9 +232,19 @@ footer{background:var(--ink);color:rgba(255,255,255,.25);text-align:center;paddi
 <div><span class="about-stat-num">7</span><div class="about-stat-label" data-en>Projects</div><div class="about-stat-label" data-cn>项目</div></div>
 <div><span class="about-stat-num">2027</span><div class="about-stat-label" data-en>Graduation</div><div class="about-stat-label" data-cn>毕业</div></div>
 </div>
-</div></div></section>
+</div>
+</div>
 
-<!-- PROJECTS -->
+<!-- Skills integrated here -->
+<div class="skills-grid reveal">
+<div class="skill-item"><h4><span data-en>Languages</span><span data-cn>编程</span></h4><p>Python · SQL · R · Git</p></div>
+<div class="skill-item"><h4><span data-en>Quantitative</span><span data-cn>量化</span></h4><p data-en>Factor Models · VaR · DCF · Monte Carlo · Backtesting</p><p data-cn>因子模型 · VaR · DCF · 蒙特卡洛 · 回测</p></div>
+<div class="skill-item"><h4><span data-en>Data & ML</span><span data-cn>数据</span></h4><p>pandas · NumPy · scikit-learn · statsmodels · matplotlib</p></div>
+<div class="skill-item"><h4><span data-en>Domain</span><span data-cn>领域</span></h4><p data-en>Equity Research · Risk Mgmt · ETL · Dashboards</p><p data-cn>行业研究 · 风险管理 · ETL · 看板</p></div>
+</div>
+</div></section>
+
+<!-- ═══ PROJECTS ═══ -->
 <section id="projects"><div class="section-inner">
 <div class="section-line"></div>
 <div class="section-eyebrow">Portfolio</div>
@@ -177,7 +253,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.25);text-align:center;paddi
 <!-- ─── INTERNSHIP ─── -->
 <div class="group-header"><span class="gh-line"></span><span class="gh-text"><span data-en>Internship Projects</span><span data-cn>实习项目</span></span></div>
 
-<div class="project"><div class="project-top">
+<div class="project reveal"><div class="project-top">
 <span class="project-badge badge-intern">Morgan Stanley · Hong Kong</span>
 <h3><span data-en>Multi-Factor Fund Analysis &amp; FOF Selection</span><span data-cn>多因子基金分析与FOF筛选框架</span></h3>
 <p class="project-desc" data-en>Screened 10 HK/offshore equity funds using Sharpe, Sortino, Calmar, and Information Ratio. Treynor-Mazuy factor attribution (250-day rolling) to decompose selection alpha and timing beta.</p>
@@ -188,7 +264,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.25);text-align:center;paddi
 <div class="project-images"><img src="projects/fund-analysis/01_performance_ranking.png" onclick="openModal(this)"><img src="projects/fund-analysis/03_tm_attribution.png" onclick="openModal(this)"><img src="projects/fund-analysis/05_summary_table.png" onclick="openModal(this)"><img src="projects/fund-analysis/06_cumulative_nav.png" onclick="openModal(this)"></div>
 <div class="project-foot"><a class="pf-link" href="https://github.com/renhe0707/fund-analysis" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>Repository</a></div></div>
 
-<div class="project"><div class="project-top">
+<div class="project reveal"><div class="project-top">
 <span class="project-badge badge-intern">Oin Auto · San Francisco</span>
 <h3><span data-en>Vehicle Condition Classification &amp; Data Pipeline</span><span data-cn>车辆状态分类与自动化数据管道</span></h3>
 <p class="project-desc" data-en>Gradient Boosting classifier on 8,500+ vehicle telemetry records (92% accuracy). Automated pipeline supports 50K+ records/day processing.</p>
@@ -202,7 +278,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.25);text-align:center;paddi
 <!-- ─── COURSE ─── -->
 <div class="group-header"><span class="gh-line"></span><span class="gh-text"><span data-en>Course Projects</span><span data-cn>课程项目</span></span></div>
 
-<div class="project"><div class="project-top">
+<div class="project reveal"><div class="project-top">
 <span class="project-badge badge-course">MA 37300 Financial Mathematics</span>
 <h3><span data-en>Shenwan Sector Rotation Strategy</span><span data-cn>申万行业轮动策略回测</span></h3>
 <p class="project-desc" data-en>Monthly rotation across 31 Shenwan industries using momentum, risk-adjusted momentum, and turnover trend factors. Outperformed CSI 300 by +12.5pp in 2025.</p>
@@ -213,21 +289,21 @@ footer{background:var(--ink);color:rgba(255,255,255,.25);text-align:center;paddi
 <div class="project-images"><img src="projects/sector-rotation/01_cumulative_returns.png" onclick="openModal(this)"><img src="projects/sector-rotation/02_monthly_excess_returns.png" onclick="openModal(this)"><img src="projects/sector-rotation/03_holdings_heatmap.png" onclick="openModal(this)"><img src="projects/sector-rotation/06_annual_returns.png" onclick="openModal(this)"></div>
 <div class="project-foot"><a class="pf-link" href="https://github.com/renhe0707/sector-rotation" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>Repository</a></div></div>
 
-<div class="project"><div class="project-top">
+<div class="project reveal"><div class="project-top">
 <span class="project-badge badge-course">STAT 41600 Probability</span>
 <h3><span data-en>Portfolio VaR &amp; Stress Testing</span><span data-cn>投资组合VaR与压力测试</span></h3>
 <p class="project-desc" data-en>5-asset portfolio VaR/CVaR via Historical Simulation and Monte Carlo (50K sims). Stress-tested against COVID crash, Fed hike cycle, and hypothetical extremes.</p>
 <p class="project-desc" data-cn>5类资产组合的VaR/CVaR（历史模拟+5万次蒙特卡洛）。对新冠暴跌、加息周期等极端情景压力测试。</p>
 </div>
 <div class="project-pills"><span class="tech">Monte Carlo</span><span class="tech">scipy</span><span class="tech">Stress Testing</span></div>
-<div class="project-metrics"><div class="pm-item"><span class="pm-val">1.03%</span><span class="pm-label">95% VaR</span></div><div class="pm-item"><span class="pm-val">50K</span><span class="pm-label" data-en>Simulations</span><span class="pm-label" data-cn>模拟次数</span></div><div class="pm-item"><span class="pm-val">3</span><span class="pm-label" data-en>Scenarios</span><span class="pm-label" data-cn>压力情景</span></div></div>
+<div class="project-metrics"><div class="pm-item"><span class="pm-val">1.03%</span><span class="pm-label">95% VaR</span></div><div class="pm-item"><span class="pm-val">50K</span><span class="pm-label" data-en>Simulations</span><span class="pm-label" data-cn>模拟次数</span></div><div class="pm-item"><span class="pm-val">3</span><span class="pm-label" data-en>Scenarios</span><span data-cn>压力情景</span></div></div>
 <div class="project-images"><img src="projects/var-analysis/01_portfolio_nav.png" onclick="openModal(this)"><img src="projects/var-analysis/02_var_distribution.png" onclick="openModal(this)"><img src="projects/var-analysis/04_stress_tests.png" onclick="openModal(this)"><img src="projects/var-analysis/05_correlation.png" onclick="openModal(this)"></div>
 <div class="project-foot"><a class="pf-link" href="https://github.com/renhe0707/var-analysis" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>Repository</a></div></div>
 
 <!-- ─── INDEPENDENT ─── -->
 <div class="group-header"><span class="gh-line"></span><span class="gh-text"><span data-en>Independent Research</span><span data-cn>独立研究</span></span></div>
 
-<div class="project"><div class="project-top">
+<div class="project reveal"><div class="project-top">
 <span class="project-badge badge-research"><span data-en>Equity Research</span><span data-cn>个股研报</span></span>
 <h3><span data-en>Pop Mart (9992.HK) — Deep Dive Report</span><span data-cn>泡泡玛特 (9992.HK) — 深度研报</span></h3>
 <p class="project-desc" data-en>Full bilingual equity research: business model, DuPont ROE, DCF &amp; comparable valuation. BUY rating, target HK$300 (+38%).</p>
@@ -238,7 +314,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.25);text-align:center;paddi
 <div class="project-images"><img src="projects/equity-research/01_revenue_profit.png" onclick="openModal(this)"><img src="projects/equity-research/04_ip_breakdown.png" onclick="openModal(this)"><img src="projects/equity-research/06_dupont_roe.png" onclick="openModal(this)"><img src="projects/equity-research/07_dcf_sensitivity.png" onclick="openModal(this)"></div>
 <div class="project-foot"><a class="pf-link" href="https://github.com/renhe0707/equity-research" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>Repository</a></div></div>
 
-<div class="project"><div class="project-top">
+<div class="project reveal"><div class="project-top">
 <span class="project-badge badge-research"><span data-en>Data Analytics</span><span data-cn>数据分析</span></span>
 <h3>S&amp;P 500 Sector ETF Analysis</h3>
 <p class="project-desc" data-en>3 years of daily data for 11 SPDR sector ETFs. Composite defensive scoring (Sharpe, Beta, Max Drawdown) identifying top risk-adjusted sectors.</p>
@@ -248,7 +324,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.25);text-align:center;paddi
 <div class="project-images"><img src="projects/sp500/correlation_heatmap.png" onclick="openModal(this)"><img src="projects/sp500/risk_return_scatter.png" onclick="openModal(this)"><img src="projects/sp500/rolling_returns.png" onclick="openModal(this)"><img src="projects/sp500/sector_dashboard.png" onclick="openModal(this)"></div>
 <div class="project-foot"><a class="pf-link" href="https://github.com/renhe0707/sp500-sector-analysis" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>Repository</a></div></div>
 
-<div class="project"><div class="project-top">
+<div class="project reveal"><div class="project-top">
 <span class="project-badge badge-research"><span data-en>Data Analytics</span><span data-cn>数据分析</span></span>
 <h3>E-Commerce Transaction Analysis</h3>
 <p class="project-desc" data-en>12,500+ transactions → KPI dashboards, RFM segmentation (791 at-risk customers), 3 retention strategies projected +15% retention.</p>
@@ -260,31 +336,31 @@ footer{background:var(--ink);color:rgba(255,255,255,.25);text-align:center;paddi
 
 </div></section>
 
-<!-- EXPERIENCE -->
+<!-- ═══ EXPERIENCE ═══ -->
 <section id="experience"><div class="section-inner">
 <div class="section-line"></div>
 <div class="section-eyebrow"><span data-en>Experience</span><span data-cn>经历</span></div>
 <h2 class="section-heading"><span data-en>Work Experience</span><span data-cn>工作经历</span></h2>
 <div class="timeline">
-<div class="tl-item"><div class="tl-date">Jun – Aug 2024</div><h3><span data-en>Research Analyst Intern</span><span data-cn>研究分析实习生</span></h3><div class="tl-company">Morgan Stanley · Hong Kong</div>
+<div class="tl-item reveal"><div class="tl-date">Jun – Aug 2024</div><h3><span data-en>Research Analyst Intern</span><span data-cn>研究分析实习生</span></h3><div class="tl-company">Morgan Stanley · Hong Kong</div>
 <p class="tl-desc" data-en>Analyzed 10+ multi-factor equity funds. Treynor-Mazuy attribution (250-day rolling). Automated pipelines improving turnaround 40%. Produced 5+ quant research reports.</p>
 <p class="tl-desc" data-cn>分析10+只多因子基金，Treynor-Mazuy归因（250日滚动），自动化管道提升效率40%，输出5+份量化研报。</p></div>
-<div class="tl-item"><div class="tl-date">Dec 2023 – Mar 2024</div><h3><span data-en>Data Analyst Intern</span><span data-cn>数据分析实习生</span></h3><div class="tl-company">Oin Auto · San Francisco</div>
+<div class="tl-item reveal"><div class="tl-date">Dec 2023 – Mar 2024</div><h3><span data-en>Data Analyst Intern</span><span data-cn>数据分析实习生</span></h3><div class="tl-company">Oin Auto · San Francisco</div>
 <p class="tl-desc" data-en>Classification model (92% accuracy) on 8K+ records. Automated pipeline &amp; dashboard supporting 50K+ daily records.</p>
 <p class="tl-desc" data-cn>8K+条数据分类模型（92%准确率）。自动化管道与看板支撑日处理5万+条。</p></div>
 </div>
 
 <h2 class="section-heading" style="margin-top:3rem"><span data-en>Leadership</span><span data-cn>领导经历</span></h2>
 <div class="timeline">
-<div class="tl-item"><div class="tl-date">2025</div><h3><span data-en>Co-Founder</span><span data-cn>联合创始人</span></h3><div class="tl-company">Bondminton at Purdue</div><p class="tl-desc" data-en>Built from zero to 39 members in one semester.</p>
+<div class="tl-item reveal"><div class="tl-date">2025</div><h3><span data-en>Co-Founder</span><span data-cn>联合创始人</span></h3><div class="tl-company">Bondminton at Purdue</div><p class="tl-desc" data-en>Built from zero to 39 members in one semester.</p>
 <p class="tl-desc" data-cn>一学期从零发展至39名会员。</p></div>
-<div class="tl-item"><div class="tl-date">Jan – Dec 2025</div><h3><span data-en>Director, Sustainability</span><span data-cn>可持续发展委员会主任</span></h3><div class="tl-company">Purdue Student Government</div>
+<div class="tl-item reveal"><div class="tl-date">Jan – Dec 2025</div><h3><span data-en>Director, Sustainability</span><span data-cn>可持续发展委员会主任</span></h3><div class="tl-company">Purdue Student Government</div>
 <p class="tl-desc" data-en>2 data-backed proposals adopted by university facilities.</p>
 <p class="tl-desc" data-cn>2份数据驱动建议书被校方采纳。</p></div>
 </div>
 </div></section>
 
-<!-- CONTACT -->
+<!-- ═══ CONTACT ═══ -->
 <section id="contact"><div class="section-inner">
 <div class="section-line"></div>
 <div class="section-eyebrow">Contact</div>
@@ -300,12 +376,48 @@ footer{background:var(--ink);color:rgba(255,255,255,.25);text-align:center;paddi
 <div class="modal" id="modal" onclick="closeModal()"><img id="modal-img" src="" alt=""></div>
 
 <script>
-window.addEventListener('scroll',()=>document.querySelector('nav').style.borderBottomColor=scrollY>20?'var(--border)':'transparent');
+/* ── Nav border on scroll ── */
+window.addEventListener('scroll',()=>{
+  document.querySelector('nav').style.borderBottomColor=scrollY>20?'var(--border)':'transparent';
+});
 document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>document.querySelector('.nav-links').classList.remove('open')));
+
+/* ── Language toggle ── */
 function toggleLang(){document.body.classList.toggle('zh');document.querySelector('.lang-btn').textContent=document.body.classList.contains('zh')?'EN / 中':'中 / EN'}
+
+/* ── Modal ── */
 function openModal(img){document.getElementById('modal-img').src=img.src;document.getElementById('modal').classList.add('on');document.body.style.overflow='hidden'}
 function closeModal(){document.getElementById('modal').classList.remove('on');document.body.style.overflow=''}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+
+/* ── Dot Nav: show after scrolling past hero, highlight active section ── */
+const dotNav=document.getElementById('dotNav');
+const sections=document.querySelectorAll('section[id]');
+const dotLinks=dotNav.querySelectorAll('a');
+
+function updateDotNav(){
+  const scrollY=window.scrollY;
+  const heroH=document.querySelector('.hero').offsetHeight;
+  // show/hide dot nav
+  dotNav.classList.toggle('visible',scrollY>heroH*.6);
+  // highlight active
+  let current='';
+  sections.forEach(s=>{
+    if(scrollY>=s.offsetTop-300) current=s.id;
+  });
+  dotLinks.forEach(a=>{
+    a.classList.toggle('active',a.dataset.section===current);
+  });
+}
+window.addEventListener('scroll',updateDotNav,{passive:true});
+updateDotNav();
+
+/* ── Scroll reveal ── */
+const revealEls=document.querySelectorAll('.reveal');
+const revealObs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');revealObs.unobserve(e.target)}});
+},{threshold:.15});
+revealEls.forEach(el=>revealObs.observe(el));
 </script>
 </body>
 </html>
